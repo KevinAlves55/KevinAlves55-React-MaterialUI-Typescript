@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 export const AppRoutes = () => {
@@ -5,7 +6,7 @@ export const AppRoutes = () => {
     return(
 
         <Routes>
-            <Route path="/pagina-inicial" element={<p>Lorem ipsum</p>} />
+            <Route path="/pagina-inicial" element={<Button>Doar</Button>} />
 
             <Route path="*" element={<Navigate to="/pagina-inicial" />} />
         </Routes>
