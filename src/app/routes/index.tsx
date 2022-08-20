@@ -1,10 +1,26 @@
 import { Button } from "@mui/material";
+import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDrawerContext } from "../shared/contexts";
 
 export const AppRoutes = () => {
 
-	const { toggleDrawerOpen } = useDrawerContext();
+	const { toggleDrawerOpen, setDrawerOptions } = useDrawerContext();
+
+	useEffect(() => {
+		setDrawerOptions([
+			{
+				icon: "home",
+				path: "/pagina-inicial",
+				label: "HOME",
+			},
+			{
+				icon: "star",
+				path: "/cidades",
+				label: "CIDADES"
+			}
+		]);
+	}, []);
 
 	return(
 
@@ -15,7 +31,7 @@ export const AppRoutes = () => {
 					<Button variant="contained" color="primary" onClick={toggleDrawerOpen}>
                         toggle drawer
 					</Button> 
-				} 
+				}
 			/>
 
 			<Route path="*" element={<Navigate to="/pagina-inicial" />} />
