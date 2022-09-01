@@ -1,0 +1,15 @@
+{
+    "pessoas": [
+        {
+            "id": 1,
+            "nome": "Kevin",
+            "dataDeNascimento": "2005-08-05",
+            "foto": {
+                "caminho": "foto.png/alura",
+                "referencia": "foto01/alura.com",
+                "nomeDoArquivo": "carro 02_01",
+                "tipoDoArquivo": "png"
+            }
+        }
+    ]
+}
