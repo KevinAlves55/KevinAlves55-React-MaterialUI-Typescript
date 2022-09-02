@@ -6,14 +6,12 @@ import { LayoutBaseDePagina } from "../../shared/layouts";
 
 export const ListagemDeCidade: React.FC = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    
+    const [searchParams, setSearchParams] = useSearchParams();  
 
     const busca = useMemo(() => {
 
-        return searchParams.get("Busca") || "";
-
-
+        return searchParams.get("busca") || "";
+    
     }, [searchParams]);
 
     return(
@@ -24,7 +22,10 @@ export const ListagemDeCidade: React.FC = () => {
                     mostrarInputBusca
                     textoDaBusca={busca}
                     textoBotaoNovo="Nova"
-                    aoMudarTextoDeBusca={texto => setSearchParams({ busca: texto }, { replace: true })}
+                    aoMudarTextoDeBusca={texto => setSearchParams(
+                        { busca: texto }, 
+                        { replace: true }
+                    )}
                 />
             }
         >
