@@ -43,6 +43,13 @@ export const AppRoutes = () => {
 				}
 			/>
 
+			<Route 
+				path="/pessoas/detalhe/:id"
+				element={
+					<p>Detalhe</p>
+				}
+			/>
+
 			<Route path="*" element={<Navigate to="/pagina-inicial" />} />
 		</Routes>
 
