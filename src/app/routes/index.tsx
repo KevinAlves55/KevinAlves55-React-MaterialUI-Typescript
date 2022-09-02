@@ -4,7 +4,7 @@ import { useDrawerContext } from "../shared/contexts";
 
 import { 
 	Dashborad, 
-	ListagemDeCidade 
+	ListagemDePessoas 
 } from "../pages";
 
 export const AppRoutes = () => {
@@ -19,9 +19,9 @@ export const AppRoutes = () => {
 				label: "HOME",
 			},
 			{
-				icon: "location_city",
-				path: "/cidades",
-				label: "CIDADES"
+				icon: "people",
+				path: "/pessoas",
+				label: "PESSOAS"
 			}
 		]);
 	}, []);
@@ -37,9 +37,9 @@ export const AppRoutes = () => {
 			/>
 
 			<Route 
-				path="/cidades" 
+				path="/pessoas" 
 				element= { 
-					<ListagemDeCidade /> 
+					<ListagemDePessoas /> 
 				}
 			/>
 
