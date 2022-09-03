@@ -98,6 +98,7 @@ export const ListagemDePessoas: React.FC = () => {
                         { busca: texto, pagina: "1" },
                         { replace: true }
                     )}
+                    aoClicarEmNovo={() => navigate("/pessoas/detalhe/nova")}
                 />
             }
         >
