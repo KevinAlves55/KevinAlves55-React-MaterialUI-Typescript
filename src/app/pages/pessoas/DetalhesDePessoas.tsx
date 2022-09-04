@@ -35,6 +35,8 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
             
             PessoasService.getById(Number(id)).then((result) => {
 
+                setIsLoading(false);
+
                 if (result instanceof Error) {
                     
                     alert(result.message);
@@ -44,6 +46,8 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
                     setNome(result.nomeCompleto);
                     console.log(result);
+
+                    formRef.current?.setData(result);
 
                 }
 
@@ -55,21 +59,41 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
     const handleSave = (dados: IFormData) => {
 
-        PessoasService.create(dados).then((result) => {
+        setIsLoading(true);
 
-            if (result instanceof Error) {
-                
-                alert("Erro ao cadastrar pessoa");
+        if (id === "nova") {
+            
+            PessoasService.create(dados).then((result) => {
 
-            } else {
+                setIsLoading(false);
 
-                alert("Pessoa cadastrada com sucesso");
-                navigate("/pessoas");
+                if (result instanceof Error) {
+                    
+                    alert("Erro ao cadastrar pessoa");
+    
+                } else {
+    
+                    navigate(`/pessoas/detalhe/${result}`);
+    
+                }
+    
+            });
 
-            }
+        } else {
 
-        });
+            PessoasService.updateById(Number(id), { id: Number(id), ...dados}).then((result) => {
 
+                setIsLoading(false);
+
+                if (result instanceof Error) {
+                    
+                    alert("Erro ao cadastrar pessoa");
+    
+                }
+    
+            });
+
+        }
     };
 
     const handleDelete = (id: number) => {
@@ -117,9 +141,9 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
             <Form ref={formRef} onSubmit={(dados) => handleSave(dados)}>
                 
-                <VTextField name="NomeCompleto" />
-                <VTextField name="email" />
-                <VTextField name="cidadeId" />
+                <VTextField placeholder="Nome Completo" name="nomeCompleto" />
+                <VTextField placeholder="Email" name="email" />
+                <VTextField placeholder="Cidade ID" name="cidadeId" />
 
             </Form>
             
