@@ -1,15 +1,28 @@
-import { LinearProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { LinearProgress, TextField } from "@mui/material";
+import { Form } from "@unform/web";
+import { FormHandles } from "@unform/core";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { FerramentasDeDetalhe } from "../../shared/components";
+import { VTextField } from "../../shared/forms";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 
-export const DetalhesDePessoas: React.FC = () => {
+interface IFormData {
+
+    email: string
+    cidadeId: number
+    nomeCompleto: string
+
+}
+
+export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
     const { id = "nova" } = useParams<"id">();
     const navigate = useNavigate();
+
+    const formRef = useRef<FormHandles>(null);
 
     const [isLoading, setIsLoading] = useState(false);
     const [nome, setNome] = useState("");
@@ -40,9 +53,22 @@ export const DetalhesDePessoas: React.FC = () => {
 
     }, [id]);
 
-    const handleSave = () => {
+    const handleSave = (dados: IFormData) => {
 
-        console.log("save");
+        PessoasService.create(dados).then((result) => {
+
+            if (result instanceof Error) {
+                
+                alert("Erro ao cadastrar pessoa");
+
+            } else {
+
+                alert("Pessoa cadastrada com sucesso");
+                navigate("/pessoas");
+
+            }
+
+        });
 
     };
 
@@ -80,18 +106,22 @@ export const DetalhesDePessoas: React.FC = () => {
                     mostrarBotaoNovo={id !== "nova"}
                     mostrarBotaoApagar={id !== "nova"}
 
-                    aoClicarEmSalvar={handleSave}
-                    aoClicarEmSalvarEVoltar={handleSave}
+                    aoClicarEmSalvar={() => formRef.current?.submitForm()}
                     aoClicarEmApagar={() => handleDelete(Number(id))}
                     aoClicarEmNovo={() => navigate("/pessoas/detalhe/nova")}
                     aoClicarEmVoltar={() => navigate("/pessoas")}
+                    aoClicarEmSalvarEVoltar={() => formRef.current?.submitForm()}
                 />
             }
         >
 
-            {isLoading && (
-                <LinearProgress variant="indeterminate"/>
-            )}
+            <Form ref={formRef} onSubmit={(dados) => handleSave(dados)}>
+                
+                <VTextField name="NomeCompleto" />
+                <VTextField name="email" />
+                <VTextField name="cidadeId" />
+
+            </Form>
             
         </LayoutBaseDePagina>
 
