@@ -1,14 +1,13 @@
-import { Form } from "@unform/web";
-import { FormHandles } from "@unform/core";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box } from "@mui/system";
+import { FormHandles } from "@unform/core";
 
 import { FerramentasDeDetalhe } from "../../shared/components";
-import { VTextField } from "../../shared/forms";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
+import { VTextField, VForm } from "../../shared/forms";
 
 interface IFormData {
 
@@ -148,7 +147,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
             }
         >
 
-            <Form ref={formRef} onSubmit={(dados) => handleSave(dados)}>
+            <VForm ref={formRef} onSubmit={(dados) => handleSave(dados)}>
 
                 <Box m={1} display="flex" flexDirection="column" component={Paper} variant="outlined">
 
@@ -200,7 +199,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                     </Grid>
                 </Box>
 
-            </Form>
+            </VForm>
             
         </LayoutBaseDePagina>
 
