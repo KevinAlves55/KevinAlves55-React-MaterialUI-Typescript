@@ -54,6 +54,14 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
             });
 
+        } else {
+            
+            formRef.current?.setData({
+                email: "",
+                cidadeId: "",
+                nomeCompleto: ""
+            });
+
         }
 
     }, [id]);
