@@ -5,7 +5,7 @@ import * as yup from "yup";
 
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
-import { VTextField, VForm, useVForm } from "../../shared/forms";
+import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
 
@@ -19,9 +19,16 @@ interface IFormData {
 
 const formValidatorSchema: yup.SchemaOf<IFormData> = yup.object().shape({
 
-    nomeCompleto: yup.string().required().min(3),
-    email: yup.string().required().email(),
-    cidadeId: yup.number().required()
+    nomeCompleto: yup.string()
+    .required()
+    .min(3),
+
+    email: yup.string()
+    .required()
+    .email(),
+
+    cidadeId: yup.number()
+    .required()
 
 });
 
@@ -135,7 +142,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
         }).catch((errors: yup.ValidationError) => {
 
-            const validationErros: { [ key: string ]: string } = {};
+            const validationErros: IVFormErrors = {};
 
             errors.inner.forEach(error => {
 
