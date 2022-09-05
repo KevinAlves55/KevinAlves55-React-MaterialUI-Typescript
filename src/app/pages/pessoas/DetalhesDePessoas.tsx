@@ -5,9 +5,9 @@ import { FormHandles } from "@unform/core";
 
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
+import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
-import { VTextField, VForm } from "../../shared/forms";
 
 interface IFormData {
 
@@ -22,7 +22,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
     const { id = "nova" } = useParams<"id">();
     const navigate = useNavigate();
 
-    const formRef = useRef<FormHandles>(null);
+    const { formRef, save, IsSaveAndClose, IsSaveAndNew, saveAndClose } = useVForm();
 
     const [isLoading, setIsLoading] = useState(false);
     const [nome, setNome] = useState("");
@@ -80,8 +80,17 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                     alert("Erro ao cadastrar pessoa");
     
                 } else {
+
+                    if (IsSaveAndClose()) {
+
+                        navigate("/pessoas");
+                    
+                    } else {
+
+                        navigate(`/pessoas/detalhe/${result}`);
+                        
+                    }
     
-                    navigate(`/pessoas/detalhe/${result}`);
     
                 }
     
@@ -95,8 +104,16 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
                 if (result instanceof Error) {
                     
-                    alert("Erro ao cadastrar pessoa");
+                    alert(result.message);
     
+                } else {
+
+                    if (IsSaveAndClose()) {
+
+                        navigate("/pessoas");
+                    
+                    }
+
                 }
     
             });
@@ -138,11 +155,11 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                     mostrarBotaoNovo={id !== "nova"}
                     mostrarBotaoApagar={id !== "nova"}
 
-                    aoClicarEmSalvar={() => formRef.current?.submitForm()}
+                    aoClicarEmSalvar={save}
+                    aoClicarEmSalvarEVoltar={saveAndClose}
                     aoClicarEmApagar={() => handleDelete(Number(id))}
                     aoClicarEmNovo={() => navigate("/pessoas/detalhe/nova")}
                     aoClicarEmVoltar={() => navigate("/pessoas")}
-                    aoClicarEmSalvarEVoltar={() => formRef.current?.submitForm()}
                 />
             }
         >

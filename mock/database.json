@@ -20,9 +20,9 @@
     },
     {
       "id": 10,
-      "email": "programador.lucasreact@gmail.com",
+      "nomeCompleto": "Lucas Pereira Silva",
       "cidadeId": 1,
-      "nomeCompleto": "Lucas Rei Do React"
+      "email": "programador.lucasreact@gmail.com"
     },
     {
       "id": 11,
@@ -59,6 +59,18 @@
       "nomeCompleto": "Mily Oliveira De Souza",
       "email": "Mily456789@gmail.com",
       "cidadeId": "9"
+    },
+    {
+      "nomeCompleto": "George Leal",
+      "cidadeId": "1",
+      "email": "georgeleal@gmail.com",
+      "id": 18
+    },
+    {
+      "nomeCompleto": "Arthur Alves Da Silva",
+      "cidadeId": "5",
+      "email": "arthur@gmail.com",
+      "id": 19
     }
   ]
 }
