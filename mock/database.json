@@ -2,27 +2,21 @@
   "pessoas": [
     {
       "id": 1,
-      "email": "programador.kevin4773@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Kevin Alves Da Silva"
+      "nomeCompleto": "Kevin Alves Da Silva",
+      "cidadeId": "4",
+      "email": "programador.kevin4773@gmail.com"
     },
     {
       "id": 5,
-      "email": "andre.kevin4773@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "André Kevin Silva"
+      "nomeCompleto": "André Teixeira Silva",
+      "cidadeId": "5",
+      "email": "andre.kevin4773@gmail.com"
     },
     {
       "id": 6,
       "email": "marcel@gmail.com",
       "cidadeId": 5,
       "nomeCompleto": "Marcel Texeira Neura"
-    },
-    {
-      "id": 9,
-      "email": "nerf@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Naiara Almeida Gomes"
     },
     {
       "id": 10,
@@ -59,12 +53,6 @@
       "email": "mel@hotmail.com",
       "cidadeId": 1,
       "nomeCompleto": "Melissa Alves Da Silva"
-    },
-    {
-      "id": 16,
-      "email": "mel@hotmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Ana Vitória Alves Da Silva"
     },
     {
       "id": 17,
