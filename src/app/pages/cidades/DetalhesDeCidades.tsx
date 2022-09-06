@@ -6,36 +6,22 @@ import * as yup from "yup";
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
-import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
+import { CidadesService } from "../../shared/services/api/cidades/CidadesService";
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
 
 interface IFormData {
 
-    email: string
-    cidadeId: number
-    nomeCompleto: string
+    nome: string
 
 }
 
 const formValidatorSchema: yup.SchemaOf<IFormData> = yup.object().shape({
 
-    nomeCompleto: yup.string()
-    .required()
-    .min(3)
-    .uppercase()
-    .trim(),
+    nome: yup.string().required().min(3).trim(),
 
-    email: yup.string()
-    .required()
-    .email()
-    .trim(),
-
-    cidadeId: yup.number()
-    .required()
-    
 });
 
-export const DetalhesDePessoas: React.FC<IFormData> = () => {
+export const DetalhesDeCidades: React.FC<IFormData> = () => {
 
     const { id = "nova" } = useParams<"id">();
     const navigate = useNavigate();
@@ -51,18 +37,18 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
             setIsLoading(true);
             
-            PessoasService.getById(Number(id)).then((result) => {
+            CidadesService.getById(Number(id)).then((result) => {
 
                 setIsLoading(false);
 
                 if (result instanceof Error) {
                     
                     alert(result.message);
-                    navigate("/pessoas");
+                    navigate("/cidades");
 
                 } else {
 
-                    setNome(result.nomeCompleto);
+                    setNome(result.nome);
                     console.log(result);
 
                     formRef.current?.setData(result);
@@ -74,9 +60,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
         } else {
             
             formRef.current?.setData({
-                email: "",
-                cidadeId: "",
-                nomeCompleto: ""
+                nome: ""
             });
 
         }
@@ -94,23 +78,23 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
             if (id === "nova") {
                 
-                PessoasService.create(dadosValidados).then((result) => {
+                CidadesService.create(dadosValidados).then((result) => {
 
                     setIsLoading(false);
 
                     if (result instanceof Error) {
                         
-                        alert("Erro ao cadastrar pessoa");
+                        alert("Erro ao cadastrar cidade");
         
                     } else {
 
                         if (IsSaveAndClose()) {
 
-                            navigate("/pessoas");
+                            navigate("/cidades");
                         
                         } else {
 
-                            navigate(`/pessoas/detalhe/${result}`);
+                            navigate(`/cidades/detalhe/${result}`);
                             
                         }
         
@@ -121,7 +105,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
             } else {
 
-                PessoasService.updateById(Number(id), { id: Number(id), ...dadosValidados}).then((result) => {
+                CidadesService.updateById(Number(id), { id: Number(id), ...dadosValidados}).then((result) => {
 
                     setIsLoading(false);
 
@@ -133,7 +117,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
                         if (IsSaveAndClose()) {
 
-                            navigate("/pessoas");
+                            navigate("/cidades");
                         
                         }
 
@@ -165,7 +149,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
         if (confirm("Realmente deseja apagar?")) {
 
-            PessoasService.deleteById(id).then(result => {
+            CidadesService.deleteById(id).then(result => {
 
                 if (result instanceof Error) {
     
@@ -173,8 +157,8 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                     
                 } else {
 
-                    alert("Registro deletado com sucesso");
-                    navigate("/pessoas");
+                    alert("Cidade deletado com sucesso");
+                    navigate("/cidades");
 
                 }
             
@@ -187,7 +171,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
     return(
 
         <LayoutBaseDePagina
-            titulo={id === "nova" ? "Nova pessoa" : nome}
+            titulo={id === "nova" ? "Nova cidade" : nome}
             barraDeFerramentas={
                 <FerramentasDeDetalhe 
                     textoBotaoNovo="Nova"
@@ -198,8 +182,8 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                     aoClicarEmSalvar={save}
                     aoClicarEmSalvarEVoltar={saveAndClose}
                     aoClicarEmApagar={() => handleDelete(Number(id))}
-                    aoClicarEmNovo={() => navigate("/pessoas/detalhe/nova")}
-                    aoClicarEmVoltar={() => navigate("/pessoas")}
+                    aoClicarEmNovo={() => navigate("/cidades/detalhe/nova")}
+                    aoClicarEmVoltar={() => navigate("/cidades")}
                 />
             }
         >
@@ -223,33 +207,12 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} xl={2}>
                                 <VTextField
-                                    label="Nome Completo"
+                                    label="Nome"
                                     fullWidth
-                                    name="nomeCompleto"
+                                    name="nome"
                                     disabled={isLoading}
+                                    placeholder="Ex: São Paulo"
                                     onChange={e => setNome(e.target.value)}
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container item direction="row" spacing={2}>
-                            <Grid item xs={12} sm={12} md={6} xl={2}>
-                                <VTextField
-                                    label="Cidade"
-                                    fullWidth 
-                                    name="cidadeId"
-                                    disabled={isLoading}
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container item direction="row" spacing={2}>
-                            <Grid item xs={12} sm={12} md={6} xl={2}>
-                                <VTextField
-                                    label="Email"
-                                    fullWidth
-                                    name="email"
-                                    disabled={isLoading}
                                 />
                             </Grid>
                         </Grid>
