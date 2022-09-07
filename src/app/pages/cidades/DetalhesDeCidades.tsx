@@ -11,7 +11,7 @@ import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
 
 interface IFormData {
 
-    nome: string
+    nome: string;
 
 }
 

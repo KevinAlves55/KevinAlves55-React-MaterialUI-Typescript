@@ -12,9 +12,9 @@ import { AutoCompleteCidade } from "./components/AutoCompleteCidade";
 
 interface IFormData {
 
-    email: string
-    cidadeId: number
-    nomeCompleto: string
+    email: string;
+    cidadeId: number;
+    nomeCompleto: string;
 
 }
 
