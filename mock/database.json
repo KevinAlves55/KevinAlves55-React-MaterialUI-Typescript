@@ -1,10 +1,16 @@
 {
   "pessoas": [
     {
-      "cidadeId": 2,
-      "email": "kagamer455677@gmail.com",
+      "id": 1,
       "nomeCompleto": "KEVIN ALVES DA SILVA",
-      "id": 1
+      "cidadeId": 4,
+      "email": "kagamer455677@gmail.com"
+    },
+    {
+      "cidadeId": 1,
+      "email": "homemaranha@gmail.com",
+      "nomeCompleto": "HOMEM ARANHA",
+      "id": 2
     }
   ],
   "cidades": [
@@ -35,6 +41,14 @@
     {
       "nome": "Guarulhos",
       "id": 7
+    },
+    {
+      "nome": "Julio Prestes",
+      "id": 8
+    },
+    {
+      "nome": "Gado demais",
+      "id": 9
     }
   ]
 }

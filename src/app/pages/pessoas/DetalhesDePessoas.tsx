@@ -8,6 +8,7 @@ import { LayoutBaseDePagina } from "../../shared/layouts";
 import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
+import { AutoCompleteCidade } from "./components/AutoCompleteCidade";
 
 interface IFormData {
 
@@ -234,12 +235,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} xl={2}>
-                                <VTextField
-                                    label="Cidade"
-                                    fullWidth 
-                                    name="cidadeId"
-                                    disabled={isLoading}
-                                />
+                                <AutoCompleteCidade isExternalLoading={isLoading} />
                             </Grid>
                         </Grid>
 
