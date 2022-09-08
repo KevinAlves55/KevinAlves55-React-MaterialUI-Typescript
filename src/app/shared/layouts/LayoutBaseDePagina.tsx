@@ -7,7 +7,7 @@ interface ILayoutBaseDePaginaProps {
 
     children: React.ReactNode;
     titulo: string;
-    barraDeFerramentas: ReactNode;
+    barraDeFerramentas?: ReactNode;
 
 }
 
