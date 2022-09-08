@@ -1,16 +1,16 @@
 {
   "pessoas": [
     {
-      "id": 2,
-      "nomeCompleto": "HOMEM ARANHA",
-      "cidadeId": 2,
-      "email": "homemaranha@gmail.com"
-    },
-    {
       "cidadeId": 1,
       "email": "ericakesbrasil34@gmail.com",
       "nomeCompleto": "ERIKA OLIVEIRA DA SILVA",
       "id": 3
+    },
+    {
+      "cidadeId": 6,
+      "email": "alex@gmail.com",
+      "nomeCompleto": "ALEX ALVES DE SOUZA",
+      "id": 4
     }
   ],
   "cidades": [
@@ -54,5 +54,8 @@
       "nome": "Pão de Açúcar",
       "id": 11
     }
-  ]
+  ],
+  "auth": {
+    "acessToken": "aaaaaaaaa.bbbbbbbb.ccccccc"
+  }
 }
