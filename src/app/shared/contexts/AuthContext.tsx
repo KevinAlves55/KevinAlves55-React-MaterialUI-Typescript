@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { AuthService } from "../services/api/auth/AuthService";
 
 interface TAuthContextData {
@@ -16,6 +16,12 @@ const LOCAL_STORAGE_KEY__ACCESS_TOKEN = "APP_ACCESS_TOKEN";
 interface AuthProvider {
     children: React.ReactNode;
 }
+
+export const useAuthContext = () => {
+
+    return useContext(AuthContext);
+
+};
 
 export const AuthProvider: React.FC<AuthProvider> = ({ children }) => {
 
