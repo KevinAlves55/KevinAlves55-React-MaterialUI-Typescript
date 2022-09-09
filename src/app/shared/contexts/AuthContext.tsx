@@ -1,10 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+
 import { AuthService } from "../services/api/auth/AuthService";
 
 interface TAuthContextData {
 
-    isAuthenticated: boolean;
     logout: () => void;
+    isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<string | void>;
 
 }
@@ -13,7 +14,7 @@ const AuthContext = createContext({} as TAuthContextData);
 
 const LOCAL_STORAGE_KEY__ACCESS_TOKEN = "APP_ACCESS_TOKEN";
 
-interface AuthProvider {
+interface IAuthProviderProps {
     children: React.ReactNode;
 }
 
@@ -23,7 +24,7 @@ export const useAuthContext = () => {
 
 };
 
-export const AuthProvider: React.FC<AuthProvider> = ({ children }) => {
+export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
     const [accessToken, setAccessToken] = useState<string>();
 
@@ -52,8 +53,8 @@ export const AuthProvider: React.FC<AuthProvider> = ({ children }) => {
     }, []);
 
     const handleLogout = useCallback(() => {
-        setAccessToken(undefined);
         localStorage.removeItem(LOCAL_STORAGE_KEY__ACCESS_TOKEN);
+        setAccessToken(undefined);
     }, []);
 
     const isAuthenticated = useMemo(() => !!accessToken,[accessToken]);

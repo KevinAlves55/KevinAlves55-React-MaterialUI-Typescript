@@ -27,10 +27,6 @@
       "id": 3
     },
     {
-      "nome": "Barueri",
-      "id": 5
-    },
-    {
       "nome": "Leopodina",
       "id": 6
     },
@@ -53,9 +49,13 @@
     {
       "nome": "Pão de Açúcar",
       "id": 11
+    },
+    {
+      "nome": "Santander",
+      "id": 12
     }
   ],
   "auth": {
-    "acessToken": "aaaaaaaaa.bbbbbbbb.ccccccc"
+    "accessToken": "aaaaaaaaa.bbbbbbbb.ccccccc"
   }
 }
