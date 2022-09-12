@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { TextField, TextFieldProps } from "@mui/material";
+import { PatternFormatProps, PatternFormat } from "react-number-format";
 import { useField } from "@unform/core";
 
-type TVTextField = TextFieldProps & {
+type VPatternFormatProps = Omit<PatternFormatProps, "value"> & Omit<TextFieldProps, "value"> & {
 
     name: string;
+    onValueChange?: (value: string) => void;
 
 }
 
-export const VTextField: React.FC<TVTextField> = ({ name, ...rest }) => {
+export const VPatternFormat: React.FC<VPatternFormatProps> = ({ name, onValueChange, ...rest }) => {
 
     const { clearError, fieldName, defaultValue, error, registerField } = useField(name);
 
@@ -24,17 +26,24 @@ export const VTextField: React.FC<TVTextField> = ({ name, ...rest }) => {
 
     }, [registerField, fieldName, value]);
 
+    const handleChange = (value: string) => {
+        setValue(value);
+        onValueChange && onValueChange(value);
+    };
+
     return(
         
-        <TextField
+        <PatternFormat
             {...rest}
 
+            customInput={TextField}
             error={!!error}
             helperText={error}
             defaultValue={defaultValue}
             
             value={value}
             onChange={e => { setValue(e.target.value); rest.onChange?.(e); }}
+            onValueChange={({ value }) => handleChange(value)}
             onKeyDown={e => { error && clearError(); rest.onKeyDown?.(e); }}
         />
 
