@@ -8,6 +8,8 @@ export interface IListagemPessoa {
     email: string;
     cidadeId: number;
     nomeCompleto: string;
+    cnpj: string;
+    celular: string;
 
 }
 
@@ -17,6 +19,8 @@ export interface IDetalhePessoa {
     email: string;
     cidadeId: number;
     nomeCompleto: string;
+    cnpj: string;
+    celular: string;
 
 }
 

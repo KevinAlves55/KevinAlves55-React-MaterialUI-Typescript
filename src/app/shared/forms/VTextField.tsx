@@ -12,7 +12,7 @@ export const VTextField: React.FC<TVTextField> = ({ name, ...rest }) => {
 
     const { clearError, fieldName, defaultValue, error, registerField } = useField(name);
 
-    const [value, setValue] = useState<string>(defaultValue);
+    const [value, setValue] = useState(defaultValue || "");
 
     useEffect(() => {
 

@@ -9,12 +9,15 @@ import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
 import { AutoCompleteCidade } from "./components/AutoCompleteCidade";
+import { VPatternFormat } from "../../shared/forms/VPatternFormat";
 
 interface IFormData {
 
     email: string;
     cidadeId: number;
     nomeCompleto: string;
+    cnpj: string;
+    celular: string;
 
 }
 
@@ -24,6 +27,7 @@ const formValidatorSchema: yup.SchemaOf<IFormData> = yup.object().shape({
     .required()
     .min(3)
     .uppercase()
+    .matches(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/, "O campo só permite letras e acentos")
     .trim(),
 
     email: yup.string()
@@ -32,6 +36,13 @@ const formValidatorSchema: yup.SchemaOf<IFormData> = yup.object().shape({
     .trim(),
 
     cidadeId: yup.number()
+    .required(),
+
+    cnpj: yup.string()
+    .required()
+    .min(11),
+
+    celular: yup.string()
     .required()
     
 });
@@ -77,7 +88,9 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
             formRef.current?.setData({
                 email: "",
                 cidadeId: "",
-                nomeCompleto: ""
+                nomeCompleto: "",
+                cnpj: "",
+                celular: ""
             });
 
         }
@@ -223,6 +236,20 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
 
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} xl={2}>
+                                <VPatternFormat
+                                    label="CNPJ"
+                                    fullWidth
+                                    name="cnpj"
+                                    disabled={isLoading}
+                                    format="###.###.###-##"
+                                    valueIsNumericString
+                                    mask="_"
+                                />
+                            </Grid>
+                        </Grid>
+
+                        <Grid container item direction="row" spacing={2}>
+                            <Grid item xs={12} sm={12} md={6} xl={2}>
                                 <VTextField
                                     label="Nome Completo"
                                     fullWidth
@@ -246,6 +273,20 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                                     fullWidth
                                     name="email"
                                     disabled={isLoading}
+                                />
+                            </Grid>
+                        </Grid>
+
+                        <Grid container item direction="row" spacing={2}>
+                            <Grid item xs={12} sm={12} md={6} xl={2}>
+                                <VPatternFormat
+                                    label="Celular"
+                                    fullWidth
+                                    name="celular"
+                                    disabled={isLoading}
+                                    format="(##) #####-####"
+                                    valueIsNumericString
+                                    mask="_"
                                 />
                             </Grid>
                         </Grid>

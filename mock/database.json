@@ -4,13 +4,49 @@
       "cidadeId": 1,
       "email": "ericakesbrasil34@gmail.com",
       "nomeCompleto": "ERIKA OLIVEIRA DA SILVA",
+      "cpf": "",
+      "celular": "",
       "id": 3
     },
     {
+      "id": 4,
+      "cnpj": "54862787545",
+      "nomeCompleto": "ALEX ALVES DE SOUZA",
       "cidadeId": 6,
       "email": "alex@gmail.com",
-      "nomeCompleto": "ALEX ALVES DE SOUZA",
-      "id": 4
+      "celular": "11945878215"
+    },
+    {
+      "cidadeId": 2,
+      "email": "programador.kevin5773@gmail.com",
+      "nomeCompleto": "ANA",
+      "cpf": "",
+      "celular": "",
+      "id": 5
+    },
+    {
+      "cnpj": "54862792804",
+      "cidadeId": 3,
+      "email": "meu@gmail.com",
+      "nomeCompleto": "MILA ALMEIDA CAMPOS",
+      "celular": "",
+      "id": 6
+    },
+    {
+      "celular": "11963620881",
+      "cnpj": "33521247895",
+      "cidadeId": 2,
+      "email": "ericakesbrasil34@gmail.com",
+      "nomeCompleto": "ERIKA OLIVEIRA DA SILVA",
+      "id": 7
+    },
+    {
+      "celular": "11945781245",
+      "cnpj": "78946513222",
+      "cidadeId": 6,
+      "email": "junior@gmail.com",
+      "nomeCompleto": "JUNIOR OLIVER",
+      "id": 8
     }
   ],
   "cidades": [
