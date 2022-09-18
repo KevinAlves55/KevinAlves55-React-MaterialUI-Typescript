@@ -52,9 +52,9 @@ export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
     const smDown = useMediaQuery(theme.breakpoints.down("sm"));
     const mdDown = useMediaQuery(theme.breakpoints.down("md"));
 
-    return(
+    return (
 
-        <Box 
+        <Box
             height={theme.spacing(5)}
             marginX={1}
             padding={1}
@@ -63,6 +63,7 @@ export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
             gap={1}
             alignItems="center"
             component={Paper}
+            marginTop={1}
         >
             {(mostrarBotaoSalvar && !mostrarBotaoSalvarCarregando) && (
                 <Button

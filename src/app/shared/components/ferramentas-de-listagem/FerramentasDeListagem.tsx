@@ -24,8 +24,8 @@ export const FerramentasDeListagem: React.FC<IFerramentasDeListagemProps> = ({
 
     const theme = useTheme();
 
-    return(
-        <Box 
+    return (
+        <Box
             height={theme.spacing(5)}
             marginX={1}
             padding={1}
@@ -35,18 +35,20 @@ export const FerramentasDeListagem: React.FC<IFerramentasDeListagemProps> = ({
             alignItems="center"
             justifyContent="space-between"
             component={Paper}
+            marginTop={1}
+            marginBottom={1}
         >
             {mostrarInputBusca && (
-                <TextField 
+                <TextField
                     size="small"
                     value={textoDaBusca}
                     placeholder={Environment.INPUT_DE_BUSCA}
                     onChange={(e) => aoMudarTextoDeBusca?.(e.target.value)}
                     InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
-                            <Icon>search</Icon>
-                          </InputAdornment>
+                            <InputAdornment position="start">
+                                <Icon>search</Icon>
+                            </InputAdornment>
                         ),
                     }}
                 />

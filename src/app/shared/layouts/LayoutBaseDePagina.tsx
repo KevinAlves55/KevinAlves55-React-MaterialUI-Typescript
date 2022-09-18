@@ -1,6 +1,7 @@
-import { Icon, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Box } from "@mui/system";
 import { ReactNode } from "react";
+import { Icon, IconButton, Typography, useMediaQuery, useTheme, AppBar, Container, Toolbar } from "@mui/material";
+import { Box } from "@mui/system";
+import AdbIcon from "@mui/icons-material/Adb";
 import { useDrawerContext } from "../contexts";
 
 interface ILayoutBaseDePaginaProps {
@@ -16,38 +17,49 @@ export const LayoutBaseDePagina: React.FC<ILayoutBaseDePaginaProps> = ({ childre
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down("sm"));
     const mdDown = useMediaQuery(theme.breakpoints.down("md"));
-    
+
     const { toggleDrawerOpen } = useDrawerContext();
 
-    return(
-        <Box height="100%" display="flex" flexDirection="column" gap={1}>
-            <Box 
-                padding={1} 
-                display="flex" 
-                alignItems="center" 
-                gap={1} 
-                height={theme.spacing(smDown ? 6 : mdDown ? 8 : 12)}
+    return (
+        <Box height="100%" display="flex" flexDirection="column" gap={2}>
+            <AppBar
+                position="static"
             >
-                {smDown && (
-                    <IconButton onClick={toggleDrawerOpen}>
-                        <Icon>menu</Icon>
-                    </IconButton>
-                )}
+                <Container maxWidth="xl">
+                    <Toolbar>
+                        {smDown && (
+                            <IconButton onClick={toggleDrawerOpen}>
+                                <Icon>menu</Icon>
+                            </IconButton>
+                        )}
 
-                <Typography 
-                    overflow="hidden"
-                    whiteSpace="nowrap"
-                    textOverflow="ellipes"
-                    variant={smDown ? "h5" : mdDown ? "h4" : "h3"}
-                >
-                    {titulo}
-                </Typography>
-            </Box>
+                        <AdbIcon
+                            sx={{ display: { xs: "none", md: "flex" }, mr: 2, fontSize: 35 }}
+                        />
 
-            {barraDeFerramentas && 
-            (<Box>
-                {barraDeFerramentas}
-            </Box>)}
+                        <Typography
+                            overflow="hidden"
+                            whiteSpace="nowrap"
+                            textOverflow="ellipes"
+                            variant={smDown ? "h6" : mdDown ? "h5" : "h4"}
+                            noWrap
+                            sx={{
+                                mr: 2,
+                                fontWeight: 500,
+                                color: "inherit",
+                                textDecoration: "none"
+                            }}
+                        >
+                            {titulo}
+                        </Typography>
+                    </Toolbar>
+                </Container>
+            </AppBar>
+
+            {barraDeFerramentas &&
+                (<Box>
+                    {barraDeFerramentas}
+                </Box>)}
 
             <Box flex={1} overflow="auto">
                 {children}

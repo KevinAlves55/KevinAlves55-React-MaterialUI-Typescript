@@ -55,9 +55,6 @@ export const Dashborad: React.FC = () => {
     return (
         <LayoutBaseDePagina
             titulo="Página inicial"
-            barraDeFerramentas={(
-                <FerramentasDeListagem mostrarBotaoNovo={false} />
-            )}
         >
             <Box width="100%" display="flex">
                 <Grid container m={2}>
