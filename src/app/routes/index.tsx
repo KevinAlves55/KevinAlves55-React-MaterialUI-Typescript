@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDrawerContext } from "../shared/contexts";
 
-import { 
-	Dashborad, 
-	DetalhesDeCidades, 
-	DetalhesDePessoas, 
-	ListagemDeCidades, 
-	ListagemDePessoas 
+import {
+	Dashborad,
+	DetalhesDeCidades,
+	DetalhesDePessoas,
+	ListagemDeCidades,
+	ListagemDeEndereco,
+	ListagemDePessoas
 } from "../pages";
 
 export const AppRoutes = () => {
@@ -30,45 +31,57 @@ export const AppRoutes = () => {
 				icon: "location_city",
 				path: "/cidades",
 				label: "CIDADES"
+			},
+			{
+				icon: "business",
+				path: "/enderecos",
+				label: "ENDEREÇOS"
 			}
 		]);
 	}, []);
 
-	return(
+	return (
 
 		<Routes>
-			<Route 
-				path="/pagina-inicial" 
-				element= { 
-					<Dashborad /> 
+			<Route
+				path="/pagina-inicial"
+				element={
+					<Dashborad />
 				}
 			/>
 
-			<Route 
-				path="/pessoas" 
-				element= { 
-					<ListagemDePessoas /> 
+			<Route
+				path="/pessoas"
+				element={
+					<ListagemDePessoas />
 				}
 			/>
 
-			<Route 
+			<Route
 				path="/pessoas/detalhe/:id"
 				element={
 					<DetalhesDePessoas />
 				}
 			/>
 
-			<Route 
-				path="/cidades" 
-				element= { 
-					<ListagemDeCidades /> 
+			<Route
+				path="/cidades"
+				element={
+					<ListagemDeCidades />
 				}
 			/>
 
-			<Route 
+			<Route
 				path="/cidades/detalhe/:id"
 				element={
 					<DetalhesDeCidades />
+				}
+			/>
+
+			<Route
+				path="/enderecos"
+				element={
+					<ListagemDeEndereco />
 				}
 			/>
 

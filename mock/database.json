@@ -67,6 +67,8 @@
       "id": 12
     }
   ],
+  "enderecos": [
+  ],
   "auth": {
     "accessToken": "aaaaaaaaa.bbbbbbbb.ccccccc"
   }
