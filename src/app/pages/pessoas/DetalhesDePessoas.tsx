@@ -24,27 +24,27 @@ interface IFormData {
 const formValidatorSchema: yup.SchemaOf<IFormData> = yup.object().shape({
 
     nomeCompleto: yup.string()
-    .required()
-    .min(3)
-    .uppercase()
-    .matches(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/, "O campo só permite letras e acentos")
-    .trim(),
+        .required()
+        .min(3)
+        .uppercase()
+        .matches(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/, "O campo só permite letras e acentos")
+        .trim(),
 
     email: yup.string()
-    .required()
-    .email()
-    .trim(),
+        .required()
+        .email()
+        .trim(),
 
     cidadeId: yup.number()
-    .required(),
+        .required(),
 
     cnpj: yup.string()
-    .required()
-    .min(11),
+        .required()
+        .min(11),
 
     celular: yup.string()
-    .required()
-    
+        .required()
+
 });
 
 export const DetalhesDePessoas: React.FC<IFormData> = () => {
@@ -62,13 +62,13 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
         if (id !== "nova") {
 
             setIsLoading(true);
-            
+
             PessoasService.getById(Number(id)).then((result) => {
 
                 setIsLoading(false);
 
                 if (result instanceof Error) {
-                    
+
                     alert(result.message);
                     navigate("/pessoas");
 
@@ -84,7 +84,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
             });
 
         } else {
-            
+
             formRef.current?.setData({
                 email: "",
                 cidadeId: "",
@@ -100,59 +100,59 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
     const handleSave = (dados: IFormData) => {
 
         formValidatorSchema.validate(
-            dados, 
+            dados,
             { abortEarly: false }
         ).then((dadosValidados) => {
 
             setIsLoading(true);
 
             if (id === "nova") {
-                
+
                 PessoasService.create(dadosValidados).then((result) => {
 
                     setIsLoading(false);
 
                     if (result instanceof Error) {
-                        
+
                         alert("Erro ao cadastrar pessoa");
-        
+
                     } else {
 
                         if (IsSaveAndClose()) {
 
                             navigate("/pessoas");
-                        
+
                         } else {
 
                             navigate(`/pessoas/detalhe/${result}`);
-                            
+
                         }
-        
-        
+
+
                     }
-        
+
                 });
 
             } else {
 
-                PessoasService.updateById(Number(id), { id: Number(id), ...dadosValidados}).then((result) => {
+                PessoasService.updateById(Number(id), { id: Number(id), ...dadosValidados }).then((result) => {
 
                     setIsLoading(false);
 
                     if (result instanceof Error) {
-                        
+
                         alert(result.message);
-        
+
                     } else {
 
                         if (IsSaveAndClose()) {
 
                             navigate("/pessoas");
-                        
+
                         }
 
                     }
-        
+
                 });
 
             }
@@ -172,7 +172,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
             formRef.current?.setErrors(validationErros);
 
         });
-    
+
     };
 
     const handleDelete = (id: number) => {
@@ -182,28 +182,28 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
             PessoasService.deleteById(id).then(result => {
 
                 if (result instanceof Error) {
-    
+
                     alert(result.message);
-                    
+
                 } else {
 
                     alert("Registro deletado com sucesso");
                     navigate("/pessoas");
 
                 }
-            
+
             });
-        
-        }     
+
+        }
 
     };
 
-    return(
+    return (
 
         <LayoutBaseDePagina
             titulo={id === "nova" ? "Nova pessoa" : nome}
             barraDeFerramentas={
-                <FerramentasDeDetalhe 
+                <FerramentasDeDetalhe
                     textoBotaoNovo="Nova"
                     mostrarBotaoSalvarEVoltar
                     mostrarBotaoNovo={id !== "nova"}
@@ -294,7 +294,7 @@ export const DetalhesDePessoas: React.FC<IFormData> = () => {
                 </Box>
 
             </VForm>
-            
+
         </LayoutBaseDePagina>
 
     );

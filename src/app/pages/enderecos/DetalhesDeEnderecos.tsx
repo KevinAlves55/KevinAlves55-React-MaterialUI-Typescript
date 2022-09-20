@@ -9,6 +9,12 @@ import { EnderecoService } from "../../shared/services/api/enderecos/EnderecosSe
 import { Grid, LinearProgress, Paper, Typography } from "@mui/material";
 import axios from "axios";
 
+// interface IFormDataValidate {
+//     cep: string;
+//     numero: number;
+//     complemento: string;
+// }
+
 interface IFormData {
     cep: string;
     cidade: string;
@@ -20,36 +26,16 @@ interface IFormData {
 }
 
 const formValidatorSchema: yup.SchemaOf<IFormData> = yup.object().shape({
-    cep: yup.string()
-        .required()
-        .trim(),
-
-    cidade: yup.string()
-        .required()
-        .trim(),
-
-    estado: yup.string()
-        .required()
-        .trim(),
-
-    bairro: yup.string()
-        .required()
-        .trim(),
-
-    rua: yup.string()
-        .required()
-        .trim(),
-
-    numero: yup.number()
-        .required(),
-
-    complemento: yup.string()
-        .required()
-        .trim(),
+    cep: yup.string().required().trim(),
+    cidade: yup.string().required().trim(),
+    estado: yup.string().required().trim(),
+    bairro: yup.string().required().trim(),
+    rua: yup.string().required().trim(),
+    numero: yup.number().required(),
+    complemento: yup.string().required().trim().max(6),
 });
 
 export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
-
     const { id = "nova" } = useParams<"id">();
     const navigate = useNavigate();
 
@@ -90,19 +76,14 @@ export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
     const handleCep = async (cep: string) => {
         axios(`https://viacep.com.br/ws/${cep}/json/`).then(result => {
             const dados = result.data;
+
             formRef.current?.setData({
                 cep: dados.cep,
                 cidade: dados.localidade,
                 estado: dados.uf,
                 bairro: dados.bairro,
-                rua: dados.logradouro,
-                numero: "",
-                complemento: ""
+                rua: dados.logradouro
             });
-            console.log(result);
-
-        }).catch(error => {
-            alert(error.message);
         });
     };
 
@@ -214,7 +195,7 @@ export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
                                     label="Cidade"
                                     fullWidth
                                     name="cidade"
-                                    disabled={isLoading}
+                                    disabled={true}
                                     placeholder="Ex: São Paulo"
                                 />
                             </Grid>
@@ -226,7 +207,7 @@ export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
                                     label="Estado"
                                     fullWidth
                                     name="estado"
-                                    disabled={isLoading}
+                                    disabled={true}
                                     placeholder="Ex: São Paulo"
                                 />
                             </Grid>
@@ -236,7 +217,7 @@ export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
                                     label="Bairro"
                                     fullWidth
                                     name="bairro"
-                                    disabled={isLoading}
+                                    disabled={true}
                                     placeholder="Ex: São Paulo"
                                 />
                             </Grid>
@@ -248,7 +229,7 @@ export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
                                     label="Rua"
                                     fullWidth
                                     name="rua"
-                                    disabled={isLoading}
+                                    disabled={true}
                                     placeholder="Ex: São Paulo"
                                 />
                             </Grid>
@@ -278,7 +259,6 @@ export const DetalhesDeEnderecos: React.FC<IFormData> = () => {
                 </Box>
             </VForm>
         </LayoutBaseDePagina>
-
     );
 
 };

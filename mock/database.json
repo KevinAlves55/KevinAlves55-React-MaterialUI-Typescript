@@ -167,6 +167,16 @@
       "cidade": "Itapevi",
       "cep": "06665-022",
       "id": 10
+    },
+    {
+      "complemento": "TOR B AP 32",
+      "numero": 101,
+      "cep": "06665-022",
+      "cidade": "Itapevi",
+      "estado": "SP",
+      "bairro": "Conjunto Habitacional - Setor A",
+      "rua": "Estrada do Sapiantã",
+      "id": 11
     }
   ],
   "auth": {
