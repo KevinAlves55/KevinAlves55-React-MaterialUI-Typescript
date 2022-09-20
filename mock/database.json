@@ -142,21 +142,31 @@
       "id": 8,
       "cep": "06665022",
       "cidade": "Itapevi",
-      "estado": "São Paulo",
+      "estado": "Minas Gerais",
       "bairro": "COHAB",
       "rua": "Estrada do sapiata",
       "numero": 101,
       "complemento": "TOR T AP43"
     },
     {
-      "id": 8,
+      "id": 9,
       "cep": "06665022",
       "cidade": "Itapevi",
-      "estado": "Minas Gerais",
-      "bairro": "COHAB",
-      "rua": "Estrada do sapiata",
+      "estado": "São Paulo",
+      "bairro": "São José Do Campo",
+      "rua": "Ferreira Meides",
       "numero": 101,
-      "complemento": "TOR T AP43"
+      "complemento": "TOR T AP 43"
+    },
+    {
+      "complemento": "TOR A AP 51",
+      "numero": 101,
+      "rua": "Estrada do Sapiantã",
+      "bairro": "Conjunto Habitacional - Setor A",
+      "estado": "SP",
+      "cidade": "Itapevi",
+      "cep": "06665-022",
+      "id": 10
     }
   ],
   "auth": {

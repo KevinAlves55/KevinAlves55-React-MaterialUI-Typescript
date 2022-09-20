@@ -5,6 +5,7 @@ import { useDrawerContext } from "../shared/contexts";
 import {
 	Dashborad,
 	DetalhesDeCidades,
+	DetalhesDeEnderecos,
 	DetalhesDePessoas,
 	ListagemDeCidades,
 	ListagemDeEndereco,
@@ -82,6 +83,13 @@ export const AppRoutes = () => {
 				path="/enderecos"
 				element={
 					<ListagemDeEndereco />
+				}
+			/>
+
+			<Route
+				path="/enderecos/detalhe/:id"
+				element={
+					<DetalhesDeEnderecos />
 				}
 			/>
 

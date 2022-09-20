@@ -1,34 +1,61 @@
 import { useState, useEffect, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Icon, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 
 import { FerramentasDeListagem } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { EnderecoService, IListagemEndereco } from "../../shared/services/api/enderecos/EnderecosService";
 import { UseDebounce } from "../../shared/hooks";
+import { Environment } from "../../shared/environments";
 
 
 export const ListagemDeEndereco: React.FC = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
     const [endereco, setEndereco] = useState<IListagemEndereco[]>([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
     const { debounce } = UseDebounce();
 
     const busca = useMemo(() => {
         return searchParams.get("busca") || "";
     }, [searchParams]);
 
+    const pagina = useMemo(() => {
+        return searchParams.get("pagina") || "1";
+    }, [searchParams]);
+
     useEffect(() => {
+        setIsLoading(true);
+
         debounce(() => {
-            EnderecoService.getAll(1, busca).then(result => {
+            EnderecoService.getAll(Number(pagina), busca).then(result => {
+                setIsLoading(false);
+
                 if (result instanceof Error) {
                     console.log("Erro ao trazer os dados");
                 } else {
                     setEndereco(result.data);
+                    setTotalCount(result.totalCount);
                 }
             });
         });
-    }, [busca]);
+    }, [busca, pagina]);
+
+    const handleDelete = (id: number) => {
+        if (confirm("Tem certeza que deseja excluir esse registro?")) {
+            EnderecoService.deleteById(id).then(result => {
+                if (result instanceof Error) {
+                    alert(result.message);
+                } else {
+                    setEndereco(oldEnderecos => [
+                        ...oldEnderecos.filter(oldEndereco => oldEndereco.id !== id)
+                    ]);
+                }
+            });
+        }
+    };
 
     return (
 
@@ -40,9 +67,10 @@ export const ListagemDeEndereco: React.FC = () => {
                     textoDaBusca={busca}
                     textoBotaoNovo="Nova"
                     aoMudarTextoDeBusca={texto => setSearchParams(
-                        { busca: texto },
+                        { busca: texto, pagina: "1" },
                         { replace: true }
                     )}
+                    aoClicarEmNovo={() => navigate("/enderecos/detalhe/nova")}
                 />
             }
         >
@@ -75,11 +103,13 @@ export const ListagemDeEndereco: React.FC = () => {
                                     <TableCell>
                                         <IconButton
                                             size="small"
+                                            onClick={() => handleDelete(id)}
                                         >
                                             <Icon>delete</Icon>
                                         </IconButton>
                                         <IconButton
                                             size="small"
+                                            onClick={() => navigate(`/enderecos/detalhe/${id}`)}
                                         >
                                             <Icon>edit</Icon>
                                         </IconButton>
@@ -96,6 +126,35 @@ export const ListagemDeEndereco: React.FC = () => {
                             ))
                         }
                     </TableBody>
+
+                    {totalCount === 0 && !isLoading && (
+                        <caption>{Environment.LISTAGEM_VAZIA}</caption>
+                    )}
+
+                    <TableFooter>
+                        {isLoading && (
+                            <TableRow>
+                                <TableCell colSpan={9}>
+                                    <LinearProgress variant="indeterminate" />
+                                </TableCell>
+                            </TableRow>
+                        )}
+
+                        {(totalCount > Environment.LIMITES_DE_LINHAS) && (
+                            <TableRow>
+                                <TableCell colSpan={9}>
+                                    <Pagination
+                                        page={Number(pagina)}
+                                        count={Math.ceil(totalCount / Environment.LIMITES_DE_LINHAS)}
+                                        onChange={(_, newPage) => setSearchParams(
+                                            { busca, pagina: newPage.toString() },
+                                            { replace: true }
+                                        )}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableFooter>
                 </Table>
             </TableContainer>
         </LayoutBaseDePagina>
