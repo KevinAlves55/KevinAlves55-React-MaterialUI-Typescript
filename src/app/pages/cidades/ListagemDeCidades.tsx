@@ -10,7 +10,7 @@ import { UseDebounce } from "../../shared/hooks";
 
 export const ListagemDeCidades: React.FC = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();  
+    const [searchParams, setSearchParams] = useSearchParams();
     const { debounce } = UseDebounce();
     const navigate = useNavigate();
 
@@ -21,13 +21,13 @@ export const ListagemDeCidades: React.FC = () => {
     const busca = useMemo(() => {
 
         return searchParams.get("busca") || "";
-    
+
     }, [searchParams]);
 
     const pagina = useMemo(() => {
 
         return searchParams.get("pagina") || "1";
-    
+
     }, [searchParams]);
 
     useEffect(() => {
@@ -39,24 +39,24 @@ export const ListagemDeCidades: React.FC = () => {
             CidadesService.getAll(Number(pagina), busca).then((result) => {
 
                 setIsLoading(false);
-    
+
                 if (result instanceof Error) {
-    
+
                     alert(result.message);
-                    
+
                 } else {
 
-                    console.log(result);                    
-    
+                    console.log(result);
+
                     setRows(result.data);
                     setTotalCount(result.totalCount);
-    
+
                 }
-            
+
             });
 
         });
-        
+
 
     }, [busca, pagina]);
 
@@ -67,9 +67,9 @@ export const ListagemDeCidades: React.FC = () => {
             CidadesService.deleteById(id).then(result => {
 
                 if (result instanceof Error) {
-    
+
                     alert(result.message);
-                    
+
                 } else {
 
                     setRows(oldRows => [
@@ -79,15 +79,15 @@ export const ListagemDeCidades: React.FC = () => {
                     ]);
 
                 }
-            
+
             });
-        
+
         }
 
     };
 
-    return(
-        <LayoutBaseDePagina 
+    return (
+        <LayoutBaseDePagina
             titulo="Listagem de cidades"
             barraDeFerramentas={
                 <FerramentasDeListagem
@@ -104,9 +104,9 @@ export const ListagemDeCidades: React.FC = () => {
         >
 
             <TableContainer
-                component={Paper} 
-                variant="outlined" 
-                sx={{ 
+                component={Paper}
+                variant="outlined"
+                sx={{
                     m: 1,
                     width: "auto"
                 }}
@@ -120,19 +120,18 @@ export const ListagemDeCidades: React.FC = () => {
                     </TableHead>
 
                     <TableBody>
-                        
                         {
                             rows.map(({ id, nome }) => (
                                 <TableRow key={id}>
                                     <TableCell>
-                                        <IconButton 
-                                            size="small" 
+                                        <IconButton
+                                            size="small"
                                             onClick={() => handleDelete(id)}
                                         >
                                             <Icon>delete</Icon>
                                         </IconButton>
-                                        <IconButton 
-                                            size="small" 
+                                        <IconButton
+                                            size="small"
                                             onClick={() => navigate(`/cidades/detalhe/${id}`)}
                                         >
                                             <Icon>edit</Icon>
@@ -142,7 +141,6 @@ export const ListagemDeCidades: React.FC = () => {
                                 </TableRow>
                             ))
                         }
-
                     </TableBody>
 
                     {totalCount === 0 && !isLoading && (
@@ -152,20 +150,20 @@ export const ListagemDeCidades: React.FC = () => {
                     <TableFooter>
                         {isLoading && (
                             <TableRow>
-                                <TableCell colSpan={3}>                                    
-                                    <LinearProgress variant="indeterminate"/>
+                                <TableCell colSpan={3}>
+                                    <LinearProgress variant="indeterminate" />
                                 </TableCell>
                             </TableRow>
                         )}
 
                         {(totalCount > Environment.LIMITES_DE_LINHAS) && (
                             <TableRow>
-                                <TableCell colSpan={3}>                                    
+                                <TableCell colSpan={3}>
                                     <Pagination
                                         page={Number(pagina)}
                                         count={Math.ceil(totalCount / Environment.LIMITES_DE_LINHAS)}
                                         onChange={(_, newPage) => setSearchParams(
-                                            { busca, pagina: newPage.toString() }, 
+                                            { busca, pagina: newPage.toString() },
                                             { replace: true }
                                         )}
                                     />

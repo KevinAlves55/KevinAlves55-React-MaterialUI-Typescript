@@ -68,6 +68,96 @@
     }
   ],
   "enderecos": [
+    {
+      "id": 1,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 2,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 3,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "Minas Gerais",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 4,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 5,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 6,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 7,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 8,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "São Paulo",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    },
+    {
+      "id": 8,
+      "cep": "06665022",
+      "cidade": "Itapevi",
+      "estado": "Minas Gerais",
+      "bairro": "COHAB",
+      "rua": "Estrada do sapiata",
+      "numero": 101,
+      "complemento": "TOR T AP43"
+    }
   ],
   "auth": {
     "accessToken": "aaaaaaaaa.bbbbbbbb.ccccccc"

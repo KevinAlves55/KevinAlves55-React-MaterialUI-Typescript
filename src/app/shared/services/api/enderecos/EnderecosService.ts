@@ -9,6 +9,7 @@ export interface IListagemEndereco {
     cidade: string;
     estado: string;
     bairro: string;
+    rua: string;
     numero: number;
     complemento: string;
 
@@ -21,6 +22,7 @@ export interface IDetalheEndereco {
     cidade: string;
     estado: string;
     bairro: string;
+    rua: string;
     numero: number;
     complemento: string;
 
@@ -132,7 +134,7 @@ const deleteById = async (id: number): Promise<void | Error> => {
 
 };
 
-export const PessoasService = {
+export const EnderecoService = {
 
     getAll,
     getById,
